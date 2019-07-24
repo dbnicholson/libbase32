@@ -32,7 +32,7 @@ zstr b2a_l(const czstr os, const size_t lengthinbits)
 
 zstr b2a_l_extra_Duffy(const czstr os, const size_t lengthinbits)
 {
-	zstr result = new_z(DIVCEIL(os.len*8, 5)); /* if lengthinbits is not a multiple of 8 then this is allocating space for 0, 1, or 2 extra quintets that will be truncated at the end of this function if they are not needed */
+	zstr result = new_z(divceil(os.len*8, 5)); /* if lengthinbits is not a multiple of 8 then this is allocating space for 0, 1, or 2 extra quintets that will be truncated at the end of this function if they are not needed */
 #ifndef Z_EXHAUST_EXIT
 	if (result.buf == NULL)
 		return result;
@@ -74,7 +74,7 @@ zstr b2a_l_extra_Duffy(const czstr os, const size_t lengthinbits)
 	} /* switch ((osp - os.buf) % 5) */
 
 	/* truncate any unused trailing zero quintets */
-	result.len = DIVCEIL(lengthinbits, 5);
+	result.len = divceil(lengthinbits, 5);
 	result.buf[result.len] = '\0';
 	return result;
 }
@@ -144,7 +144,7 @@ zstr a2b_l_very_Duffy(const czstr cs, const size_t lengthinbits)
 	} /* switch ((csp - cs.buf) % 8) */
 
 	/* truncate any unused trailing zero octets */
-	result.len = DIVCEIL(lengthinbits, 8);
+	result.len = divceil(lengthinbits, 8);
 	result.buf[result.len] = '\0';
 	return result;
 }

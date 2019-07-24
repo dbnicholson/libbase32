@@ -12,7 +12,7 @@
 
 static const char*const chars="ybndrfg8ejkmcpqxot1uwisza345h769";
 /* revchars: index into this table with the ASCII value of the char.  The result is the value of that quintet. */
-static const zbyte revchars[]={ 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 18, 255, 25, 26, 27, 30, 29, 7, 31, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 24, 1, 12, 3, 8, 5, 6, 28, 21, 9, 10, 255, 11, 2, 16, 13, 14, 4, 22, 17, 19, 255, 20, 15, 0, 23, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, };
+static const unsigned char revchars[]={ 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 18, 255, 25, 26, 27, 30, 29, 7, 31, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 24, 1, 12, 3, 8, 5, 6, 28, 21, 9, 10, 255, 11, 2, 16, 13, 14, 4, 22, 17, 19, 255, 20, 15, 0, 23, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, };
 
 #undef b2alen
 size_t const b2alen(const size_t lengthinbits)
@@ -50,8 +50,8 @@ zstr b2a_l_extra_Duffy(const czstr os, const size_t lengthinbits)
 		return result;
 #endif /* #ifndef Z_EXHAUST_EXIT */
 
-	zbyte* resp = result.buf + result.len; /* pointer into the result buffer, initially pointing to the "one-past-the-end" quintet */
-	const zbyte* osp = os.buf + os.len; /* pointer into the os buffer, initially pointing to the "one-past-the-end" octet */
+	unsigned char* resp = result.buf + result.len; /* pointer into the result buffer, initially pointing to the "one-past-the-end" quintet */
+	const unsigned char* osp = os.buf + os.len; /* pointer into the os buffer, initially pointing to the "one-past-the-end" octet */
 
 	/* Now this is a real live Duff's device.  You gotta love it. */
 	unsigned long x=0; /* to hold up to 32 bits worth of the input */
@@ -116,8 +116,8 @@ zstr a2b_l_very_Duffy(const czstr cs, const size_t lengthinbits)
 		return result;
 #endif /* #ifndef Z_EXHAUST_EXIT */
 
-	zbyte* resp = result.buf + result.len; /* pointer into the result buffer, initially pointing to the "one-past-the-end" octet */
-	const zbyte* csp = cs.buf + cs.len; /* pointer into the cs buffer, initially pointing to the "one-past-the-end" character */
+	unsigned char* resp = result.buf + result.len; /* pointer into the result buffer, initially pointing to the "one-past-the-end" octet */
+	const unsigned char* csp = cs.buf + cs.len; /* pointer into the cs buffer, initially pointing to the "one-past-the-end" character */
 
 	fflush(stdout);
 

@@ -31,8 +31,10 @@ OBJS=$(SRCS:%.c=%.o)
 TESTOBJS=$(TESTSRCS:%.c=%.o)
 TEST=testlb32
 LIB=$(LIBPREFIX)$(NAME)$(LIBSUFFIX)
+GCFLAGS := $(shell pkg-config --cflags glib-2.0)
+GLIBS := $(shell pkg-config --libs glib-2.0)
 
-all: $(LIB) $(TEST)
+all: $(LIB) $(TEST) wkdid
 
 include $(SRCS:%.c=%.d)
 
@@ -49,9 +51,11 @@ $(LIB): $(OBJS)
 $(TEST): $(TESTOBJS) $(LIB)
 	$(CC) $+ -o $@ $(LDFLAGS)
 
+wkdid: wkdid.c $(LIB)
+	$(CC) $(CFLAGS) $(GCFLAGS) -o $@ $^ $(LDFLAGS) $(GLIBS)
 
 clean:
-	-rm $(LIB) $(OBJS) $(TEST) $(TESTOBJS) *.d
+	-rm $(LIB) $(OBJS) $(TEST) $(TESTOBJS) wkdid *.d
 
 .PHONY: clean all
 

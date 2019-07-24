@@ -21,7 +21,7 @@ AR=ar
 
 # CC=gcc
 
-CFLAGS=-DNDEBUG -Wall -O0 $(INCDIRS)
+CFLAGS=-Wall -O0 $(INCDIRS)
 LDFLAGS=$(LIBDIRS) $(LIBS)
 
 # SRCS=$(wildcard *.c)

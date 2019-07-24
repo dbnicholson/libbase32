@@ -29,10 +29,6 @@ static char const* const base32_vernum = "0.9.12";
  */
 size_t const b2alen(const size_t lengthinbits);
 size_t const B2ALEN(const size_t lengthinbits);
-#ifdef NDEBUG
-#define b2alen(lengthinbits) divceil(lengthinbits, 5)
-#define B2ALEN(lengthinbits) (DIVCEIL((lengthinbits), 5))
-#endif /* #ifdef NDEBUG */
 
 /**
  * @param os the data to be encoded in a zstr
@@ -40,11 +36,7 @@ size_t const B2ALEN(const size_t lengthinbits);
  * @return the contents of `os' in base-32 encoded form in a (newly allocated) zstr
  */
 zstr b2a(const czstr os);
-#ifndef NDEBUG
 zstr B2A(const czstr os);
-#else
-#define B2A(x) b2a_l((x), (x).len*8)
-#endif /* #ifndef NDEBUG */
 
 /**
  * @param cs the base-32 encoded data (a string)
@@ -52,11 +44,7 @@ zstr B2A(const czstr os);
  * @return the binary data that was encoded into `cs' (a string)
  */
 zstr a2b(const czstr cs);
-#ifndef NDEBUG
 zstr A2B(const czstr cs);
-#else
-#define A2B(x) a2b_l((x), (((x).len*5+3)/8)*8)
-#endif /* #ifndef NDEBUG */
 
 /**
  * @param os the data to be encoded in a zstr

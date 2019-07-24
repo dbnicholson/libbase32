@@ -28,7 +28,6 @@ static char const* const base32_vernum = "0.9.12";
  * @precondition lengthinbits must not be greater than
  */
 size_t const b2alen(const size_t lengthinbits);
-size_t const B2ALEN(const size_t lengthinbits);
 
 /**
  * @param os the data to be encoded in a zstr
@@ -36,7 +35,6 @@ size_t const B2ALEN(const size_t lengthinbits);
  * @return the contents of `os' in base-32 encoded form in a (newly allocated) zstr
  */
 zstr b2a(const czstr os);
-zstr B2A(const czstr os);
 
 /**
  * @param cs the base-32 encoded data (a string)
@@ -44,7 +42,6 @@ zstr B2A(const czstr os);
  * @return the binary data that was encoded into `cs' (a string)
  */
 zstr a2b(const czstr cs);
-zstr A2B(const czstr cs);
 
 /**
  * @param os the data to be encoded in a zstr

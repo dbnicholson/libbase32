@@ -20,19 +20,7 @@ size_t const b2alen(const size_t lengthinbits)
 	return divceil(lengthinbits, 5);
 }
 
-#undef B2ALEN
-size_t const B2ALEN(const size_t lengthinbits)
-{
-	return divceil(lengthinbits, 5);
-}
-
 zstr b2a(const czstr os)
-{
-	return b2a_l(os, os.len*8);
-}
-
-#undef B2A
-zstr B2A(const czstr os)
 {
 	return b2a_l(os, os.len*8);
 }
@@ -92,12 +80,6 @@ zstr b2a_l_extra_Duffy(const czstr os, const size_t lengthinbits)
 }
 
 zstr a2b(const czstr cs)
-{
-	return a2b_l(cs, ((cs.len*5+3)/8)*8);
-}
-
-#undef A2B
-zstr A2B(const czstr cs)
 {
 	return a2b_l(cs, ((cs.len*5+3)/8)*8);
 }

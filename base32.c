@@ -13,6 +13,25 @@
 
 static const char*const chars="ybndrfg8ejkmcpqxot1uwisza345h769";
 
+/* Types from zstr */
+/**
+ * A zstr is simply an unsigned int length and a pointer to a buffer of
+ * unsigned chars.
+ */
+typedef struct {
+	size_t len; /* the length of the string (not counting the null-terminating character) */
+	unsigned char* buf; /* pointer to the first byte */
+} zstr;
+
+/**
+ * A zstr is simply an unsigned int length and a pointer to a buffer of
+ * const unsigned chars.
+ */
+typedef struct {
+	size_t len; /* the length of the string (not counting the null-terminating character) */
+	const unsigned char* buf; /* pointer to the first byte */
+} czstr;
+
 /* Functions from zstr */
 static zstr
 new_z(const size_t len)
@@ -35,17 +54,7 @@ divceil(size_t n, size_t d)
 	return n/d+((n%d)!=0);
 }
 
-zstr b2a(const czstr os)
-{
-	return b2a_l(os, os.len*8);
-}
-
-zstr b2a_l(const czstr os, const size_t lengthinbits)
-{
-		return b2a_l_extra_Duffy(os, lengthinbits);
-}
-
-zstr b2a_l_extra_Duffy(const czstr os, const size_t lengthinbits)
+static zstr b2a_l_extra_Duffy(const czstr os, const size_t lengthinbits)
 {
 	zstr result = new_z(divceil(os.len*8, 5)); /* if lengthinbits is not a multiple of 8 then this is allocating space for 0, 1, or 2 extra quintets that will be truncated at the end of this function if they are not needed */
 	if (result.buf == NULL)
@@ -90,6 +99,16 @@ zstr b2a_l_extra_Duffy(const czstr os, const size_t lengthinbits)
 	result.len = divceil(lengthinbits, 5);
 	result.buf[result.len] = '\0';
 	return result;
+}
+
+static zstr b2a_l(const czstr os, const size_t lengthinbits)
+{
+		return b2a_l_extra_Duffy(os, lengthinbits);
+}
+
+static zstr b2a(const czstr os)
+{
+	return b2a_l(os, os.len*8);
 }
 
 char *

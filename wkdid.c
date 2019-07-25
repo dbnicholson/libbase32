@@ -33,7 +33,7 @@ int main (int argc, char *argv[])
 
   out = b2a_l (input, sizeof(digest) * 8);
   g_print ("%s\n", out.buf);
-  free_z (out);
+  free (out.buf);
 
   return 0;
 }

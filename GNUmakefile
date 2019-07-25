@@ -9,9 +9,9 @@ __cvsid = '$Id: GNUmakefile,v 1.6 2003/12/14 18:45:15 zooko Exp $'
 
 NAME=base32
 
-INCDIRS=-I../libzutil -I../libzstr
-LIBDIRS=-L../libzutil -L../libzstr
-LIBS=-lzstr -lzutil -lm
+INCDIRS=-I../libzutil
+LIBDIRS=-L../libzutil
+LIBS=-lzutil -lm
 
 LIBPREFIX=lib
 LIBSUFFIX=.a
@@ -34,7 +34,7 @@ LIB=$(LIBPREFIX)$(NAME)$(LIBSUFFIX)
 GCFLAGS := $(shell pkg-config --cflags glib-2.0)
 GLIBS := $(shell pkg-config --libs glib-2.0)
 
-all: $(LIB) $(TEST) wkdid
+all: $(LIB) wkdid
 
 include $(SRCS:%.c=%.d)
 

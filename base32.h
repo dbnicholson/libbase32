@@ -14,11 +14,29 @@ static int const base32_vermin = 9;
 static int const base32_vermicro = 12;
 static char const* const base32_vernum = "0.9.12";
 
-#include "zstr.h" /* http://sf.net/projects/libzstr */
 #include "zutil.h" /* http://sf.net/projects/libzutil */
 
 #include <assert.h>
 #include <stddef.h>
+
+/* Types from zstr */
+/**
+ * A zstr is simply an unsigned int length and a pointer to a buffer of
+ * unsigned chars.
+ */
+typedef struct {
+	size_t len; /* the length of the string (not counting the null-terminating character) */
+	unsigned char* buf; /* pointer to the first byte */
+} zstr;
+
+/**
+ * A zstr is simply an unsigned int length and a pointer to a buffer of
+ * const unsigned chars.
+ */
+typedef struct {
+	size_t len; /* the length of the string (not counting the null-terminating character) */
+	const unsigned char* buf; /* pointer to the first byte */
+} czstr;
 
 /**
  * @param lengthinbits the length of the data in bits

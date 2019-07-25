@@ -1,5 +1,5 @@
 #include <glib.h>
-#include "base32.h"
+#include "zbase32.h"
 
 static char *
 ascii_lower(char *in)

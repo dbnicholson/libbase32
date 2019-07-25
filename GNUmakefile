@@ -7,7 +7,7 @@
 # CVS:
 __cvsid = '$Id: GNUmakefile,v 1.6 2003/12/14 18:45:15 zooko Exp $'
 
-NAME=base32
+NAME=zbase32
 
 INCDIRS=
 LIBDIRS=
@@ -25,7 +25,7 @@ CFLAGS=-Wall -O0 $(INCDIRS)
 LDFLAGS=$(LIBDIRS) $(LIBS)
 
 # SRCS=$(wildcard *.c)
-SRCS=base32.c
+SRCS=zbase32.c
 TESTSRCS=test.c
 OBJS=$(SRCS:%.c=%.o)
 TESTOBJS=$(TESTSRCS:%.c=%.o)

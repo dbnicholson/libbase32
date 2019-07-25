@@ -4,7 +4,7 @@
  *
  * See the end of this file for the free software, open source license (BSD-style).
  */
-#include "base32.h"
+#include "zbase32.h"
 
 #include <math.h>
 #include <string.h>

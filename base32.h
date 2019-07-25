@@ -37,27 +37,11 @@ typedef struct {
 } czstr;
 
 /**
- * @param lengthinbits the length of the data in bits
- *
- * @return the length of the base-32 encoding of the data in characters
- *
- * @precondition lengthinbits must not be greater than
- */
-size_t const b2alen(const size_t lengthinbits);
-
-/**
  * @param os the data to be encoded in a zstr
  *
  * @return the contents of `os' in base-32 encoded form in a (newly allocated) zstr
  */
 zstr b2a(const czstr os);
-
-/**
- * @param cs the base-32 encoded data (a string)
- *
- * @return the binary data that was encoded into `cs' (a string)
- */
-zstr a2b(const czstr cs);
 
 /**
  * @param os the data to be encoded in a zstr
@@ -96,35 +80,6 @@ zstr b2a_l_extra_Duffy(const czstr cs, const size_t lengthinbits);
  * @return an allocated string containing the zbase-32 encoded representation
  */
 char *zbase32_encode(const unsigned char *data, size_t length);
-
-/**
- *
- * @param lengthinbits the number of bits of data in encoded into `cs'
- *
- * a2b_l() will return a result big enough to hold lengthinbits bits.  So for example if cs is 
- * 4 characters long (encoding at least 15 and up to 20 bits) and lengthinbits is 16, then a2b_l() 
- * will return a string of length 2 (since 2 bytes is sufficient to store 16 bits).  If cs is 
- * 4 characters long and lengthinbits is 20, then a2b_l() will return a string of length 3 (since 
- * 3 bytes is sufficient to store 20 bits).  Note that `b2a_l()' does not mask off unused least- 
- * significant bits, so for example if cs is 4 characters long and lengthinbits is 17, then you must
- *  ensure that all three of the unused least-significant bits of cs are zero bits or you will get 
- * the wrong result.  This precondition is tested by assertions if assertions are enabled.  
- * (Generally you just require the encoder to ensure this consistency property between the least 
- * significant zero bits and value of `lengthinbits', and reject strings that have a length-in-bits 
- * which isn't a multiple of 8 and yet don't have trailing zero bits, as improperly encoded.)
- *
- * Please see the warning in the documentation of `b2a_l()' regarding the use of `b2a()' versus 
- * `b2a_l()'.
- *
- * @return a newly allocated zstr containing the data encoded in `cs'
- *
- * @precondition `cs' must be possibly base32 encoded data.: could_be_base32_encoded_l(cs, lengthinbits)
- *
- * On memory exhaustion, return a "null" zstr with .buf == NULL and .len
- * == 0.
- */
-zstr a2b_l(const czstr cs, const size_t lengthinbits);
-zstr a2b_l_very_Duffy(const czstr cs, const size_t lengthinbits);
 
 /*xxxx
 

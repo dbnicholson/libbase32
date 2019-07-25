@@ -49,10 +49,8 @@ zstr b2a_l(const czstr os, const size_t lengthinbits)
 zstr b2a_l_extra_Duffy(const czstr os, const size_t lengthinbits)
 {
 	zstr result = new_z(divceil(os.len*8, 5)); /* if lengthinbits is not a multiple of 8 then this is allocating space for 0, 1, or 2 extra quintets that will be truncated at the end of this function if they are not needed */
-#ifndef Z_EXHAUST_EXIT
 	if (result.buf == NULL)
 		return result;
-#endif /* #ifndef Z_EXHAUST_EXIT */
 
 	unsigned char* resp = result.buf + result.len; /* pointer into the result buffer, initially pointing to the "one-past-the-end" quintet */
 	const unsigned char* osp = os.buf + os.len; /* pointer into the os buffer, initially pointing to the "one-past-the-end" octet */
@@ -109,10 +107,8 @@ zstr a2b_l_very_Duffy(const czstr cs, const size_t lengthinbits)
 {
 	unsigned long x=0; /* to hold up to 32 bits worth of the input */
 	zstr result = new_z(divceil(cs.len*5, 8)); /* if lengthinbits is not a multiple of 5 then this is allocating space for 0 or 1 extra octets that will be truncated at the end of this function if they are not needed */
-#ifndef Z_EXHAUST_EXIT
 	if (result.buf == NULL)
 		return result;
-#endif /* #ifndef Z_EXHAUST_EXIT */
 
 	unsigned char* resp = result.buf + result.len; /* pointer into the result buffer, initially pointing to the "one-past-the-end" octet */
 	const unsigned char* csp = cs.buf + cs.len; /* pointer into the cs buffer, initially pointing to the "one-past-the-end" character */

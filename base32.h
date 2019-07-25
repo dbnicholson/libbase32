@@ -85,8 +85,8 @@ zstr a2b(const czstr cs);
  *
  * @return the contents of `os' in base-32 encoded form in a (newly allocated) zstr
  *
- * On memory exhaustion, if Z_EXHAUST_EXIT is not defined, return a "null" zstr with .buf == NULL 
- * and .len == 0.
+ * On memory exhaustion, return a "null" zstr with .buf == NULL and .len
+ * == 0.
  */
 zstr b2a_l(const czstr cs, const size_t lengthinbits);
 zstr b2a_l_extra_Duffy(const czstr cs, const size_t lengthinbits);
@@ -114,8 +114,8 @@ zstr b2a_l_extra_Duffy(const czstr cs, const size_t lengthinbits);
  *
  * @precondition `cs' must be possibly base32 encoded data.: could_be_base32_encoded_l(cs, lengthinbits)
  *
- * On memory exhaustion, if Z_EXHAUST_EXIT is not defined, return a "null" zstr with .buf == NULL 
- * and .len == 0.
+ * On memory exhaustion, return a "null" zstr with .buf == NULL and .len
+ * == 0.
  */
 zstr a2b_l(const czstr cs, const size_t lengthinbits);
 zstr a2b_l_very_Duffy(const czstr cs, const size_t lengthinbits);

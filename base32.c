@@ -31,8 +31,8 @@ new_z(const size_t len)
 }
 
 /* Functions from zutil */
-static unsigned int
-divceil(unsigned int n, unsigned int d)
+static size_t
+divceil(size_t n, size_t d)
 {
 	return n/d+((n%d)!=0);
 }

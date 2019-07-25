@@ -34,7 +34,7 @@ LIB=$(LIBPREFIX)$(NAME)$(LIBSUFFIX)
 GCFLAGS := $(shell pkg-config --cflags glib-2.0)
 GLIBS := $(shell pkg-config --libs glib-2.0)
 
-all: $(LIB) wkdid
+all: $(LIB) wkdid wkdurls
 
 include $(SRCS:%.c=%.d)
 
@@ -54,8 +54,11 @@ $(TEST): $(TESTOBJS) $(LIB)
 wkdid: wkdid.c $(LIB)
 	$(CC) $(CFLAGS) $(GCFLAGS) -o $@ $^ $(LDFLAGS) $(GLIBS)
 
+wkdurls: wkdurls.c $(LIB)
+	$(CC) $(CFLAGS) $(GCFLAGS) -o $@ $^ $(LDFLAGS) $(GLIBS)
+
 clean:
-	-rm $(LIB) $(OBJS) $(TEST) $(TESTOBJS) wkdid *.d
+	-rm $(LIB) $(OBJS) $(TEST) $(TESTOBJS) wkdid wkdurls *.d
 
 .PHONY: clean all
 

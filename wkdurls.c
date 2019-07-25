@@ -22,6 +22,7 @@ encode_local (const char *local)
   g_autoptr(GChecksum) checksum = NULL;
   guint8 digest[20] = { 0 };
   gsize len = sizeof(digest);
+  char *encoded;
 
   g_return_val_if_fail (local != NULL, NULL);
 
@@ -29,7 +30,15 @@ encode_local (const char *local)
   g_checksum_update (checksum, (const guchar *)local, -1);
   g_checksum_get_digest (checksum, digest, &len);
 
-  return zbase32_encode (digest, len);
+  encoded = zbase32_encode (digest, len);
+
+  /* If the returned string is NULL, then there must have been a memory
+   * allocation problem. Just exit immediately like g_malloc.
+   */
+  if (encoded == NULL)
+    g_error ("%s: %s", G_STRLOC, g_strerror (errno));
+
+  return encoded;
 }
 
 static char *
@@ -91,11 +100,6 @@ int main (int argc, char *argv[])
   g_debug ("Domain converted: %s", domain_lowered);
 
   local_encoded = encode_local (local_lowered);
-  if (local_encoded == NULL)
-    {
-      g_printerr ("error: %s\n", g_strerror (errno));
-      exit (1);
-    }
   g_debug ("Encoded local part: %s", local_encoded);
 
   advanced_url = build_advanced_url (uid_parts[0], local_encoded,

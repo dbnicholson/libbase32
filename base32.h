@@ -14,8 +14,6 @@ static int const base32_vermin = 9;
 static int const base32_vermicro = 12;
 static char const* const base32_vernum = "0.9.12";
 
-#include "zutil.h" /* http://sf.net/projects/libzutil */
-
 #include <assert.h>
 #include <stddef.h>
 

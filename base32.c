@@ -30,6 +30,13 @@ new_z(const size_t len)
 	return result;
 }
 
+/* Functions from zutil */
+static unsigned int
+divceil(unsigned int n, unsigned int d)
+{
+	return n/d+((n%d)!=0);
+}
+
 #undef b2alen
 size_t const b2alen(const size_t lengthinbits)
 {

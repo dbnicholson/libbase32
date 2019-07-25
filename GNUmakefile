@@ -9,9 +9,9 @@ __cvsid = '$Id: GNUmakefile,v 1.6 2003/12/14 18:45:15 zooko Exp $'
 
 NAME=base32
 
-INCDIRS=-I../libzutil
-LIBDIRS=-L../libzutil
-LIBS=-lzutil -lm
+INCDIRS=
+LIBDIRS=
+LIBS=-lm
 
 LIBPREFIX=lib
 LIBSUFFIX=.a

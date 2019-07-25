@@ -31,8 +31,8 @@ OBJS=$(SRCS:%.c=%.o)
 TESTOBJS=$(TESTSRCS:%.c=%.o)
 TEST=testlb32
 LIB=$(LIBPREFIX)$(NAME)$(LIBSUFFIX)
-GCFLAGS := $(shell pkg-config --cflags glib-2.0)
-GLIBS := $(shell pkg-config --libs glib-2.0)
+GCFLAGS := $(shell pkg-config --cflags glib-2.0 gio-2.0)
+GLIBS := $(shell pkg-config --libs glib-2.0 gio-2.0)
 
 all: $(LIB) wkdid wkdurls
 

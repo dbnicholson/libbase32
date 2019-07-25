@@ -100,6 +100,14 @@ zstr b2a_l_extra_Duffy(const czstr os, const size_t lengthinbits)
 	return result;
 }
 
+char *
+zbase32_encode(const unsigned char *data, size_t length)
+{
+	czstr input = { length, data };
+	zstr output = b2a(input);
+	return (char *)output.buf;
+}
+
 zstr a2b(const czstr cs)
 {
 	return a2b_l(cs, ((cs.len*5+3)/8)*8);

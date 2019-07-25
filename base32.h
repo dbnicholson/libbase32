@@ -90,6 +90,14 @@ zstr b2a_l(const czstr cs, const size_t lengthinbits);
 zstr b2a_l_extra_Duffy(const czstr cs, const size_t lengthinbits);
 
 /**
+ * @param data to be zbase-32 encoded
+ * @param length size of the data buffer
+ *
+ * @return an allocated string containing the zbase-32 encoded representation
+ */
+char *zbase32_encode(const unsigned char *data, size_t length);
+
+/**
  *
  * @param lengthinbits the number of bits of data in encoded into `cs'
  *

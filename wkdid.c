@@ -17,8 +17,7 @@ int main (int argc, char *argv[])
   g_autoptr(GChecksum) checksum = NULL;
   guint8 digest[20] = { 0 };
   gsize len = sizeof(digest);
-  const czstr input = { len, digest };
-  zstr out;
+  g_autofree char *out = NULL;
 
   if (argc != 2)
     {
@@ -31,9 +30,8 @@ int main (int argc, char *argv[])
   g_checksum_update (checksum, (const guchar *)lowered, -1);
   g_checksum_get_digest (checksum, digest, &len);
 
-  out = b2a_l (input, sizeof(digest) * 8);
-  g_print ("%s\n", out.buf);
-  free (out.buf);
+  out = zbase32_encode (digest, len);
+  g_print ("%s\n", out);
 
   return 0;
 }
